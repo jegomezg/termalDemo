@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=utf-8 />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui' />
+    <title>Leaflet Side-by-side</title>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css">
+    <script src="js/leaflet-side-by-side.js"></script>
+    <link rel="stylesheet" href="css/leaflet.css">
+    <style>
+    body {
+        margin: 0;
+        padding: 0;
+    }
+    #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+
+    }
+    .leaflet-control-side-by-side-divider {
+        pointer-events: none;
+    }
+    </style>
+</head>
+
+<body>
+    <div id='map'></div>
+
+    <script>
+        var map = L.map('map').setView([47.8095, 13.0550], 14);    
+        var osmLayer = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        }).addTo(map);
+    
+        map.createPane('left');
+        map.createPane('right');
+    
+        var imageBounds = [[47.74498643402413,12.933003225028035],[47.85371607300478,13.15955310274723]];
+    
+        var leftLayer = L.imageOverlay('data/clip_1.png', imageBounds, {opacity: 0.9,pane: 'left'}).addTo(map);
+    
+        var rightLayer = L.imageOverlay('data/ResampledNN_2.png', imageBounds, {opacity: 0.9,pane: 'right'}).addTo(map);
+    
+        L.control.sideBySide(leftLayer, rightLayer).addTo(map);
+
+        map.on('mousedown', function(e) {
+            if (e.originalEvent.target.className === 'leaflet-control-side-by-side-divider') {
+                e.originalEvent.preventDefault();
+            }
+        });
+        
+        map.on('mouseup', function() {
+            map.dragging.enable();
+        });
+        
+        map.on('mousemove', function(e) {
+            if (e.originalEvent.target.className === 'leaflet-control-side-by-side-divider') {
+                map.dragging.disable();
+            } else {
+                map.dragging.enable();
+            }
+        });
+        </script>
+        
+        
+</body>
+</html>
+

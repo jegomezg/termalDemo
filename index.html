@@ -1,50 +1,330 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset=utf-8 />
-    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui' />
-    <title>Leaflet Side-by-side</title>
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css">
-    <script src="js/leaflet-side-by-side.js"></script>
-    <link rel="stylesheet" href="css/leaflet.css">
-    <style>
-    body {
-        margin: 0;
-        padding: 0;
-    }
-    #map {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        width: 100%;
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+        #map {
+            width: 1234px;
+            height: 807px;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-side-by-side.js"></script>
 
-    }
-    .leaflet-control-side-by-side-divider {
-        pointer-events: none;
-    }
-    </style>
-</head>
+        <script src="data/ZonalStatistics_1.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[47.79337163035464,13.031238390218208],[47.80794617868779,13.062935657262285]]);
 
-<body>
-    <div id='map'></div>
-
-    <script>
-        var map = L.map('map').setView([47.8095, 13.0550], 14);    
         var osmLayer = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         }).addTo(map);
-    
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('Termatics ©<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a> &middot; <a href="https://github.com/CliffCloud/Leaflet.OverlappingMarkerSpiderfier">Leaflet.OverlappingMarkerSpiderfier</a>');        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
         map.createPane('left');
-        map.createPane('right');
-    
-        var imageBounds = [[47.74498643402413,12.933003225028035],[47.85371607300478,13.15955310274723]];
-    
-        var leftLayer = L.imageOverlay('data/clip_1.png', imageBounds, {opacity: 0.9,pane: 'left'}).addTo(map);
-    
-        var rightLayer = L.imageOverlay('data/ResampledNN_2.png', imageBounds, {opacity: 0.9,pane: 'right'}).addTo(map);
-    
-        L.control.sideBySide(leftLayer, rightLayer).addTo(map);
+        map.getPane('left').style.zIndex = 400;
+        var img_Clippedextent_0 = 'data/Clippedextent_0.png';
+        var img_bounds_Clippedextent_0 = [[47.794171888738205,13.032073132835036],[47.80759117194422,13.060186212743728]];
+        var layer_Clippedextent_0 = new L.imageOverlay(img_Clippedextent_0,
+                                              img_bounds_Clippedextent_0,
+                                              {pane: 'left'});
+        bounds_group.addLayer(layer_Clippedextent_0);
+        map.addLayer(layer_Clippedextent_0);
 
+        
+        function pop_ZonalStatistics_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['left'] !== null ? autolinker.link(feature.properties['left'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['bottom'] !== null ? autolinker.link(feature.properties['bottom'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['right'] !== null ? autolinker.link(feature.properties['right'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['top'] !== null ? autolinker.link(feature.properties['top'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['_count'] !== null ? autolinker.link(feature.properties['_count'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['_sum'] !== null ? autolinker.link(feature.properties['_sum'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['_mean'] !== null ? autolinker.link(feature.properties['_mean'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_ZonalStatistics_1_0(feature) {
+            if (feature.properties['_mean'] >= 1387.000000 && feature.properties['_mean'] <= 1444.065673 ) {
+                return {
+                pane: 'right',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(48,18,59,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['_mean'] >= 1444.065673 && feature.properties['_mean'] <= 1494.188088 ) {
+                return {
+                pane: 'right',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(65,71,173,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['_mean'] >= 1494.188088 && feature.properties['_mean'] <= 1527.652402 ) {
+                return {
+                pane: 'right',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(71,119,239,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['_mean'] >= 1527.652402 && feature.properties['_mean'] <= 1545.144497 ) {
+                return {
+                pane: 'right',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(56,165,251,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['_mean'] >= 1545.144497 && feature.properties['_mean'] <= 1556.456077 ) {
+                return {
+                pane: 'right',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(27,208,213,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['_mean'] >= 1556.456077 && feature.properties['_mean'] <= 1567.970693 ) {
+                return {
+                pane: 'right',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(38,237,166,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['_mean'] >= 1567.970693 && feature.properties['_mean'] <= 1577.956390 ) {
+                return {
+                pane: 'right',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(100,253,106,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['_mean'] >= 1577.956390 && feature.properties['_mean'] <= 1588.684829 ) {
+                return {
+                pane: 'right',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(164,252,60,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['_mean'] >= 1588.684829 && feature.properties['_mean'] <= 1600.472194 ) {
+                return {
+                pane: 'right',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(211,232,53,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['_mean'] >= 1600.472194 && feature.properties['_mean'] <= 1615.710755 ) {
+                return {
+                pane: 'right',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(245,198,58,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['_mean'] >= 1615.710755 && feature.properties['_mean'] <= 1632.803642 ) {
+                return {
+                pane: 'right',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(254,153,44,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['_mean'] >= 1632.803642 && feature.properties['_mean'] <= 1650.797021 ) {
+                return {
+                pane: 'right',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(243,99,21,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['_mean'] >= 1650.797021 && feature.properties['_mean'] <= 1672.681498 ) {
+                return {
+                pane: 'right',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(217,56,7,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['_mean'] >= 1672.681498 && feature.properties['_mean'] <= 1704.346569 ) {
+                return {
+                pane: 'right',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(176,25,1,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['_mean'] >= 1704.346569 && feature.properties['_mean'] <= 1798.965782 ) {
+                return {
+                pane: 'right',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(122,4,3,1.0)',
+                interactive: true,
+            }
+            }
+        }
+        map.createPane('right');
+        map.getPane('right').style.zIndex = 401;
+        map.getPane('right').style['mix-blend-mode'] = 'normal';
+        var layer_ZonalStatistics_1 = new L.geoJson(json_ZonalStatistics_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_ZonalStatistics_1',
+            layerName: 'layer_ZonalStatistics_1',
+            pane: 'right',
+            onEachFeature: pop_ZonalStatistics_1,
+            style: style_ZonalStatistics_1_0,
+        });
+        bounds_group.addLayer(layer_ZonalStatistics_1);
+        map.addLayer(layer_ZonalStatistics_1);
+        setBounds();
+
+        L.control.sideBySide(layer_Clippedextent_0, layer_ZonalStatistics_1).addTo(map);
         map.on('mousedown', function(e) {
             if (e.originalEvent.target.className === 'leaflet-control-side-by-side-divider') {
                 e.originalEvent.preventDefault();
@@ -62,9 +342,11 @@
                 map.dragging.enable();
             }
         });
+        L.ImageOverlay.include({
+            getBounds: function () {
+                return this._bounds;
+            }
+        });
         </script>
-        
-        
-</body>
+    </body>
 </html>
-

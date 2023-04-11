@@ -33,7 +33,7 @@
         <script src="data/ZonalStatistics_1.js"></script>
         <script>
         var map = L.map('map', {
-            zoomControl:true, maxZoom:28, minZoom:1
+            zoomControl:true, maxZoom:28, minZoom:15,zoom: 13
         }).fitBounds([[47.79337163035464,13.031238390218208],[47.80794617868779,13.062935657262285]]);
 
         var osmLayer = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -49,7 +49,8 @@
         var img_bounds_Clippedextent_0 = [[47.794171888738205,13.032073132835036],[47.80759117194422,13.060186212743728]];
         var layer_Clippedextent_0 = new L.imageOverlay(img_Clippedextent_0,
                                               img_bounds_Clippedextent_0,
-                                              {pane: 'left'});
+                                              {pane: 'left',
+                                              opacity: 0.7});
         bounds_group.addLayer(layer_Clippedextent_0);
         map.addLayer(layer_Clippedextent_0);
 
@@ -85,14 +86,14 @@
             if (feature.properties['_mean'] >= 1387.000000 && feature.properties['_mean'] <= 1444.065673 ) {
                 return {
                 pane: 'right',
-                opacity: 1,
+                opacity: 0.7,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillOpacity: 1,
+                fillOpacity: 0.7,
                 fillColor: 'rgba(48,18,59,1.0)',
                 interactive: true,
             }
@@ -100,14 +101,14 @@
             if (feature.properties['_mean'] >= 1444.065673 && feature.properties['_mean'] <= 1494.188088 ) {
                 return {
                 pane: 'right',
-                opacity: 1,
+                opacity: 0.7,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillOpacity: 1,
+                fillOpacity: 0.7,
                 fillColor: 'rgba(65,71,173,1.0)',
                 interactive: true,
             }
@@ -115,14 +116,14 @@
             if (feature.properties['_mean'] >= 1494.188088 && feature.properties['_mean'] <= 1527.652402 ) {
                 return {
                 pane: 'right',
-                opacity: 1,
+                opacity: 0.7,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillOpacity: 1,
+                fillOpacity: 0.7,
                 fillColor: 'rgba(71,119,239,1.0)',
                 interactive: true,
             }
@@ -130,14 +131,14 @@
             if (feature.properties['_mean'] >= 1527.652402 && feature.properties['_mean'] <= 1545.144497 ) {
                 return {
                 pane: 'right',
-                opacity: 1,
+                opacity: 0.7,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillOpacity: 1,
+                fillOpacity: 0.7,
                 fillColor: 'rgba(56,165,251,1.0)',
                 interactive: true,
             }
@@ -145,14 +146,14 @@
             if (feature.properties['_mean'] >= 1545.144497 && feature.properties['_mean'] <= 1556.456077 ) {
                 return {
                 pane: 'right',
-                opacity: 1,
+                opacity: 0.7,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillOpacity: 1,
+                fillOpacity: 0.7,
                 fillColor: 'rgba(27,208,213,1.0)',
                 interactive: true,
             }
@@ -160,14 +161,14 @@
             if (feature.properties['_mean'] >= 1556.456077 && feature.properties['_mean'] <= 1567.970693 ) {
                 return {
                 pane: 'right',
-                opacity: 1,
+                opacity: 0.7,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillOpacity: 1,
+                fillOpacity: 0.7,
                 fillColor: 'rgba(38,237,166,1.0)',
                 interactive: true,
             }
@@ -175,14 +176,14 @@
             if (feature.properties['_mean'] >= 1567.970693 && feature.properties['_mean'] <= 1577.956390 ) {
                 return {
                 pane: 'right',
-                opacity: 1,
+                opacity: 0.7,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillOpacity: 1,
+                fillOpacity: 0.7,
                 fillColor: 'rgba(100,253,106,1.0)',
                 interactive: true,
             }
@@ -190,14 +191,14 @@
             if (feature.properties['_mean'] >= 1577.956390 && feature.properties['_mean'] <= 1588.684829 ) {
                 return {
                 pane: 'right',
-                opacity: 1,
+                opacity: 0.7,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillOpacity: 1,
+                fillOpacity: 0.7,
                 fillColor: 'rgba(164,252,60,1.0)',
                 interactive: true,
             }
@@ -205,14 +206,14 @@
             if (feature.properties['_mean'] >= 1588.684829 && feature.properties['_mean'] <= 1600.472194 ) {
                 return {
                 pane: 'right',
-                opacity: 1,
+                opacity: 0.7,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillOpacity: 1,
+                fillOpacity: 0.7,
                 fillColor: 'rgba(211,232,53,1.0)',
                 interactive: true,
             }
@@ -220,14 +221,14 @@
             if (feature.properties['_mean'] >= 1600.472194 && feature.properties['_mean'] <= 1615.710755 ) {
                 return {
                 pane: 'right',
-                opacity: 1,
+                opacity: 0.7,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillOpacity: 1,
+                fillOpacity: 0.7,
                 fillColor: 'rgba(245,198,58,1.0)',
                 interactive: true,
             }
@@ -235,14 +236,14 @@
             if (feature.properties['_mean'] >= 1615.710755 && feature.properties['_mean'] <= 1632.803642 ) {
                 return {
                 pane: 'right',
-                opacity: 1,
+                opacity: 0.7,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillOpacity: 1,
+                fillOpacity: 0.7,
                 fillColor: 'rgba(254,153,44,1.0)',
                 interactive: true,
             }
@@ -250,14 +251,14 @@
             if (feature.properties['_mean'] >= 1632.803642 && feature.properties['_mean'] <= 1650.797021 ) {
                 return {
                 pane: 'right',
-                opacity: 1,
+                opacity: 0.7,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillOpacity: 1,
+                fillOpacity: 0.7,
                 fillColor: 'rgba(243,99,21,1.0)',
                 interactive: true,
             }
@@ -265,14 +266,14 @@
             if (feature.properties['_mean'] >= 1650.797021 && feature.properties['_mean'] <= 1672.681498 ) {
                 return {
                 pane: 'right',
-                opacity: 1,
+                opacity: 0.7,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillOpacity: 1,
+                fillOpacity: 0.7,
                 fillColor: 'rgba(217,56,7,1.0)',
                 interactive: true,
             }
@@ -280,14 +281,14 @@
             if (feature.properties['_mean'] >= 1672.681498 && feature.properties['_mean'] <= 1704.346569 ) {
                 return {
                 pane: 'right',
-                opacity: 1,
+                opacity: 0.7,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillOpacity: 1,
+                fillOpacity: 0.7,
                 fillColor: 'rgba(176,25,1,1.0)',
                 interactive: true,
             }
@@ -295,14 +296,14 @@
             if (feature.properties['_mean'] >= 1704.346569 && feature.properties['_mean'] <= 1798.965782 ) {
                 return {
                 pane: 'right',
-                opacity: 1,
+                opacity: 0.7,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillOpacity: 1,
+                fillOpacity: 0.7,
                 fillColor: 'rgba(122,4,3,1.0)',
                 interactive: true,
             }
